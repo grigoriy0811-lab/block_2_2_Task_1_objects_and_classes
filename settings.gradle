@@ -1,0 +1,4 @@
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+}
+rootProject.name = 'Task_1_objects_and_classes'
