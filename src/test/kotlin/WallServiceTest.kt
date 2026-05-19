@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
+
 class WallServiceTest {
     @BeforeEach
     fun setUp() {
@@ -17,7 +18,10 @@ class WallServiceTest {
             fromId = "Иван",
             views = 1000,
             geo = "Москва",
-            signerId = "Новости Москва"
+            signerId = "Новости Москва",
+            likes = Likes(0, false),
+            comments = Comments(0, false),
+            reposts = Reposts(0, false),
         )
 
         val result = WallService.add(post)
@@ -35,7 +39,10 @@ class WallServiceTest {
                 fromId = "Иван",
                 views = 1000,
                 geo = "Москва",
-                signerId = "Новости Москва"
+                signerId = "Новости Москва",
+                likes = Likes(0, false),
+                comments = Comments(0, false),
+                reposts = Reposts(0, false),
             )
         )
         val update = post.copy(text = "new")
@@ -51,7 +58,10 @@ class WallServiceTest {
             fromId = "Иван",
             views = 1000,
             geo = "Москва",
-            signerId = "Новости Москва"
+            signerId = "Новости Москва",
+            likes = Likes(0, false),
+            comments = Comments(0, false),
+            reposts = Reposts(0, false),
         )
         assertFalse(WallService.update(fake))
     }

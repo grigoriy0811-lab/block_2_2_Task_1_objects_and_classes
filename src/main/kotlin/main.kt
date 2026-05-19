@@ -6,6 +6,9 @@ data class Post(
     val views: Int,
     val geo: String,
     val signerId: String,
+    val likes: Likes,
+    val comments: Comments,
+    val reposts: Reposts,
 )
 
 class Likes(
@@ -50,10 +53,10 @@ object WallService {
     private var nextId = 1
 
     fun add(post: Post): Post {
-        val TODO = post.copy(id = nextId)
-        posts += TODO
+        val toDo = post.copy(id = nextId)
+        posts += toDo
         nextId++
-        return TODO
+        return toDo
     }
 
     fun update(updatedPost: Post): Boolean {
@@ -81,6 +84,10 @@ object WallService {
                 1000,
                 "Москва",
                 "Новости Москва",
+                likes = Likes(count = 0, userLikes = false),
+                comments = Comments(numberOfComments = 5, canPost = true),
+                reposts = Reposts(numberOfReposts = 10, userReposted = false),
             )
         }
+
 
