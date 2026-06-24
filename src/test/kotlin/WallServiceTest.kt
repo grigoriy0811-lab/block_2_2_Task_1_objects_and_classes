@@ -2,7 +2,6 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-
 class WallServiceTest {
     @BeforeEach
     fun setUp() {
@@ -25,7 +24,6 @@ class WallServiceTest {
         )
 
         val result = WallService.add(post)
-
         assertNotEquals(0, result.id)
     }
 
@@ -64,6 +62,48 @@ class WallServiceTest {
             reposts = Reposts(0, false),
         )
         assertFalse(WallService.update(fake))
+    }
+
+    @Test
+    fun createComment() {
+        val post = Post(
+            id = 0,
+            text = "Класс",
+            date = "25.05.26",
+            fromId = "Иван",
+            views = 100,
+            geo = "Москва",
+            signerId = "Новости Москва",
+            likes = Likes(0, false),
+            comments = Comments(0, false),
+            reposts = Reposts(0, false),
+        )
+        val addedPost = WallService.add(post)
+
+        val comment = Comment(
+            id = 0,
+            fromId = "Петя",
+            text = "Одобряю",
+            date = "25.05.26",
+            postId = addedPost.id,
+        )
+
+        WallService.createComment(addedPost.id, comment)
+    }
+
+    @Test
+    fun shouldThrow() {
+        val comment = Comment(
+            id = 0,
+            fromId = "Петя",
+            text = "Такой пост не существует",
+            date = "25.05.26",
+            postId = 999
+        )
+
+        assertThrows(PostNotFoundException::class.java) {
+            WallService.createComment(999, comment)
+        }
     }
 }
 
